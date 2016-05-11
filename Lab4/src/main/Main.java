@@ -1,7 +1,7 @@
 package main;
 
+import view.View;
 import controller.Controller;
-import View.View;
 import model.NoteModel;
 
 /**

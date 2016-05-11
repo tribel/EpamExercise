@@ -3,10 +3,10 @@ package controller;
 import java.time.LocalDate;
 import java.util.Scanner;
 
+import view.View;
 import entity.Address;
 import entity.Group;
 import entity.Notebook;
-import View.View;
 import model.NoteModel;
 
 /**
