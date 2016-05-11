@@ -8,6 +8,7 @@ import view.View;
 public class Controller {
 	
 	public static final Integer ARRAY_LENGTH = 10;
+	public static final Integer RANDOM_INTERVAL = 99;
 	
 	private View view;
 	private SortAbstract sortModel;
@@ -32,7 +33,7 @@ public class Controller {
 		Random random = new Random();
 		int[] array = new int[ARRAY_LENGTH];
 		for(int i = 0; i < array.length; i++) {
-			array[i] = random.nextInt(99);
+			array[i] = random.nextInt(RANDOM_INTERVAL);
 		}
 		
 		return array;
