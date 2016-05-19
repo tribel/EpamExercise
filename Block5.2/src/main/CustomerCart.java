@@ -45,7 +45,15 @@ public class CustomerCart {
 		return productsList.stream().mapToDouble(x -> x.getPrice()).sum();
 	}
 	
-	
+	public CustomerCart clone() throws CloneNotSupportedException {
+		CustomerCart cloneCart = (CustomerCart)super.clone();
+		cloneCart.productsList= new ArrayList<>();
+		for(Product p: productsList) {
+			cloneCart.productsList.add(p.clone());
+		}
+		
+		return cloneCart;
+	}
 	
 	
 	
