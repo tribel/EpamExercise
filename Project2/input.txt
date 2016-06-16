@@ -1,0 +1,24 @@
+For many years now, we have been finding better ways to build systems. We have
+been learning from what has come before, adopting new technologies, and observing
+how a new wave of technology companies operate in different ways to create IT systems
+that help make both their customers and their own developers happier.
+	Eric Evans’s book Domain-Driven Design (Addison-Wesley) helped us understand the
+importance of representing the real world in our code, and showed us better ways to
+model our systems. The concept of continuous delivery showed how we can more
+effectively and efficiently get our software into production, instilling in us the idea
+that we should treat every check-in as a release candidate. Our understanding of how
+the Web works has led us to develop better ways of having machines talk to other
+machines. Alistair Cockburn’s concept of hexagonal architecture guided us away from
+layered architectures where business logic could hide. Virtualization platforms
+allowed us to provision and resize our machines at will, with infrastructure automation
+giving us a way to handle these machines at scale. Some large, successful organizations
+like Amazon and Google espoused the view of small teams owning the full
+lifecycle of their services. And, more recently, Netflix has shared with us ways of
+building antifragile systems at a scale that would have been hard to comprehend just
+10 years ago.
+	Domain-driven design. Continuous delivery. On-demand virtualization. Infrastructure
+automation. Small autonomous teams. Systems at scale. Microservices have
+emerged from this world. They weren’t invented or described before the fact; they
+emerged as a trend, or a pattern, from real-world use. But they exist only because of
+all that has gone before. Throughout this book, I will pull strands out of this prior
+work to help paint a picture of how to build, manage, and evolve microservices.
