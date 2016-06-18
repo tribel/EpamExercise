@@ -1,5 +1,9 @@
 package com.tribel.project2.view;
 
+import java.util.List;
+
+import com.tribel.project2.entity.Sentence;
+
 /**
  * View class that represent data to screen.
  * @author Tribel
@@ -15,5 +19,13 @@ public class View {
 	 */
 	public void printMessage(String str) {
 		System.out.println(str);
+	}
+	
+	/**
+	 * Print entire sentence.
+	 * @param list {@link Sentence} {@link List} that will be output.
+	 */
+	public void printMessage(Sentence list) {
+		System.out.println(list.getList());
 	}
 }

@@ -12,7 +12,7 @@ public interface RegExInteface {
     String PARAGRAPH = ".+((\u2029$)|(\\z))";
     String SENTENCE = "[^.!?\\s][^.!?]*(?:[.!?](?!['\"]?\\s|$)[^.!?]*)*[.!?]?['\"]?(?=\\s|$)";
     String WORD = "(\\w*[a-zA-Z]+\\w*)|([a-zA-Z_]+\\w*)";
-    String SIGN = "(\\p{Punct}+)|(\\p{Blank}+)";
     
     
 }
+   

@@ -1,6 +1,5 @@
 package com.tribel.project2.entity;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -9,42 +8,23 @@ import java.util.List;
  * @author Tribel
  *
  */
-public class Sentence {
-	
+public class Sentence implements TextComposite<Word>{
+	  
 	private List<Word> words;
-	private List<PunctuationMark> marks;
 	
 	/**
 	 * Sentence constructor that define word and marks list.
 	 * @param words {@link List} that represents all words
-	 * @param marks {@link Character} represents all punctuation marks.
 	 */
-	public Sentence(List<Word> words, List<PunctuationMark> marks) {
+	public Sentence(List<Word> words) {
 		this.words = words;
-		this.marks = marks;
-	}
 
-	public List<Word> getWords() {
-		return words;
-	}
-
-	public List<PunctuationMark> getMarks() {
-		return marks;
 	}
 
 	@Override
-	public String toString() {
-		StringBuilder sentence = new StringBuilder();
-		List<SentencePart<? extends Object>> partsList = new ArrayList<>();
-		partsList.addAll(marks);
-		partsList.addAll(words);
-
-		partsList.sort(( o1, o2) -> Integer.compare(o1.getPosition(), o2.getPosition()));
-		partsList.stream().forEach(x -> sentence.append(x.getSentencePart()));
-		return sentence.toString();
+	public List<Word> getList() {
+		return words;
 	}
 
-	
-	
 	
 }

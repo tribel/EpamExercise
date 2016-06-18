@@ -50,7 +50,7 @@ public class Controller {
 		view.printMessage(View.FIRST_MSG);
 		Text text = new Text(fullText);
 		parse.putAnalizeText(text);
-		parse.sortByWordCount(text).stream().forEach(s -> view.printMessage(s.toString()));
+		parse.sortByWordCount(text).stream().forEach(s -> view.printMessage(s));
 
 	}
 

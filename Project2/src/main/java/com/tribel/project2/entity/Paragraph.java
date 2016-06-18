@@ -1,6 +1,5 @@
 package com.tribel.project2.entity;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -8,7 +7,7 @@ import java.util.List;
  * @author Tribel
  *
  */
-public class Paragraph {
+public class Paragraph implements TextComposite<Sentence>{
 	
 	private List<Sentence> sentenceList;
 	
@@ -23,9 +22,11 @@ public class Paragraph {
 	public void setSentenceList(List<Sentence> sentences) {
 		this.sentenceList = sentences;
 	}
-	
-	public List<Sentence> getSentenceList() {
-		return new ArrayList<Sentence>(sentenceList);
+
+
+	@Override
+	public List<Sentence> getList() {
+		return sentenceList;
 	}
 	
 	

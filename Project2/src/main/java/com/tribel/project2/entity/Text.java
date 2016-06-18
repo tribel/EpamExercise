@@ -8,7 +8,7 @@ import java.util.List;
  * @author Tribel
  *
  */
-public class Text {
+public class Text implements TextComposite<Paragraph>{
 	
 	private List<Paragraph> paragraphs;
 	private String text;
@@ -21,10 +21,6 @@ public class Text {
 	public Text(String text) {
 		this.text = text;
 		
-	}
-
-	public List<Paragraph> getParagraphs() {
-		return paragraphs;
 	}
 
 	public String getText() {
@@ -46,6 +42,11 @@ public class Text {
 
 	public void setFilteredText(String filteredText) {
 		this.filteredText = filteredText;
+	}
+
+	@Override
+	public List<Paragraph> getList() {
+		return paragraphs;
 	}
 
 }

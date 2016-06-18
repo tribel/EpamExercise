@@ -6,7 +6,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import com.tribel.project2.entity.Paragraph;
-import com.tribel.project2.entity.PunctuationMark;
 import com.tribel.project2.entity.Sentence;
 import com.tribel.project2.entity.WordFactory;
 import com.tribel.project2.entity.Text;
@@ -23,7 +22,6 @@ public class Parse {
 	private Pattern paragrapPattern;
 	private Pattern sentencePattern;
 	private Pattern wordPattern;
-	private Pattern signPattern;
 
 	/**
 	 * Default constructor , define all regular expression patterns,
@@ -33,7 +31,6 @@ public class Parse {
 		this.paragrapPattern = Pattern.compile(RegExInteface.PARAGRAPH);
 		this.sentencePattern = Pattern.compile(RegExInteface.SENTENCE);
 		this.wordPattern = Pattern.compile(RegExInteface.WORD);
-		this.signPattern = Pattern.compile(RegExInteface.SIGN);
 	}
 
 	/**
@@ -84,7 +81,7 @@ public class Parse {
 	 */
 	public List<Sentence> getSentences(String text) { 
 		return new ParserWrapper().parse((str, matcher) -> {
-			return new Sentence(getTextWords(str), getTextPunctuationMarks(str));
+			return new Sentence(getTextWords(str));
 		}, text, sentencePattern);
 	}
 	
@@ -95,24 +92,10 @@ public class Parse {
 	 */
 	public List<Word> getTextWords(String text) {
 		return new ParserWrapper().parse((str, matcher) -> {
-				Word w = WordFactory.getPart(str);
-				w.setPosition(matcher.start());
-				return w.clone(); 
+				 return WordFactory.getPart(str);
 			} , text, wordPattern);
 	}
 	
-	
-	/**
-	 * Parse text and returned punctuation mark. 
-	 * @param text text {@link String} that will be parsed.
-	 * @return {@link List} of punctuation mark.
-	 */
-	public List<PunctuationMark> getTextPunctuationMarks(String text) {
-		return new ParserWrapper().parse((str, matcher) -> {
-			return new PunctuationMark(str.charAt(0), matcher.start());
-		}
-	, text, signPattern);
-	}
 	
 	/**
 	 * Sorting sentences by word count
@@ -121,9 +104,9 @@ public class Parse {
 	 */
 	public List<Sentence> sortByWordCount(Text text) {
 		List<Sentence> sentences = new ArrayList<>();
-		text.getParagraphs().stream().forEach(x -> sentences.addAll(x.getSentenceList()));
-		sentences.sort((s1, s2) -> Integer.compare(s1.getWords().size(), 
-												   s2.getWords().size()));
+		text.getList().stream().forEach(x -> sentences.addAll(x.getList()));
+		sentences.sort((s1, s2) -> Integer.compare(s1.getList().size(), 
+												   s2.getList().size()));
 		return sentences;
 	}
 	
