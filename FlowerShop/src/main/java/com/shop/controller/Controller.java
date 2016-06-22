@@ -1,7 +1,6 @@
 package com.shop.controller;
 
-import model.FlowerShop;
-
+import com.shop.model.FlowerShop;
 import com.shop.view.View;
 
 public class Controller {
