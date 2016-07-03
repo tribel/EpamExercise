@@ -26,7 +26,7 @@ public class CpuProcess {
 		this.processId = processId;
 		this.name = name;
 		
-		System.out.println("Creating new process");
+		System.out.println("Creating new process" + processId + name);
 	}
 
 	public int getProcessId() {

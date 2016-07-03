@@ -17,15 +17,22 @@ public class CPU extends Thread{
 	public void run() {
 		System.out.println("Main CPU is running");
 		
+		ProcessObserver observer = new ProcessObserver();
 		while(!isInterrupted()) {
-			
-			ProcessObserver observer = null;
-			if(new Random().nextInt(3) % 2 == 0) {
-				observer = new ProcessObserver(firstProcess, secondProcess, firstProcess.peekProcess());
+				
+			if(!observer.isProcessDropped()) {
+				
+				if(new Random().nextInt(3) % 2 == 0) {
+					observer = new ProcessObserver(firstProcess, secondProcess, firstProcess.peekProcess());
+				} else {
+					observer = new ProcessObserver(secondProcess, firstProcess, secondProcess.peekProcess());
+				}
+				
 			} else {
-				observer = new ProcessObserver(secondProcess, firstProcess, secondProcess.peekProcess());
-			}
-			
+				observer = new ProcessObserver(observer.changeProcessAfterDroping());
+				
+			}	
+				
 			try {
 				observer.start();
 				System.out.println("Treating the process by CPU");
@@ -33,7 +40,10 @@ public class CPU extends Thread{
 				observer.interrupt();
 			} catch (InterruptedException e) {
 				System.out.println(e.getMessage());
+				return;
 			}
+			
+			
 		}
 		
 	}

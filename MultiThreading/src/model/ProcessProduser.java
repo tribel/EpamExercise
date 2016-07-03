@@ -15,12 +15,13 @@ public class ProcessProduser extends Thread{
 		int i = 0;
 		while(!isInterrupted()) {
 			try {
-				Thread.sleep(2000);
-				queue.addToQueue(new CpuProcess(++i, "process" + String.valueOf(i)));
+				Thread.sleep(4000);
+				queue.addToQueue(new CpuProcess(++i, "process " + String.valueOf(i)));
 				
 				System.out.println("Add process to queue from producer");
 			} catch (InterruptedException e) {
 				System.out.println(e.getMessage());
+				return;
 			}
 		}
 		

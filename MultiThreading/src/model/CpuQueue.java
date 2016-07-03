@@ -15,18 +15,17 @@ public class CpuQueue {
 		
 	}
 	
-	public synchronized void loseProcess(CpuProcess process) {
-		queue.set(queue.indexOf(process), null);
-		
+	public synchronized void loseProcess(CpuProcess process) {		
 		System.out.println("Losing the process " + process.getProcessId() 
 												 + process.getName());
+		if(queue.size() != 0) queue.remove(process);
 	}
 	
 	public synchronized void dropProcess(CpuProcess process) {
-		if(queue.size() != 0) queue.remove(process);
-		
 		System.out.println("Droping the process " + process.getProcessId()
-												  + process.getName());
+				  + process.getName());
+		
+		if(queue.size() != 0) queue.remove(process);
 	}
 	
 	public synchronized CpuProcess peekProcess() {
