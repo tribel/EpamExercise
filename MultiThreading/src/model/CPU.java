@@ -2,11 +2,22 @@ package model;
 
 import java.util.Random;
 
+/**
+ * Class that defines main CPU. Includes two process queue 
+ * and treat them.
+ * @author Tribel
+ *
+ */
 public class CPU extends Thread{
 
 	private CpuQueue firstProcess;
 	private CpuQueue secondProcess;
 	
+	/**
+	 * Constructor that defines both of queue
+	 * @param queue first process queue
+	 * @param queue2 second process queue
+	 */
 	public CPU(CpuQueue queue, CpuQueue queue2) {
 		this.firstProcess = queue;
 		this.secondProcess = queue2;
@@ -35,7 +46,7 @@ public class CPU extends Thread{
 				
 			try {
 				observer.start();
-				System.out.println("Treating the process by CPU");
+				System.out.println("Treating the process by CPU" );
 				Thread.sleep(3000);
 				observer.interrupt();
 			} catch (InterruptedException e) {
