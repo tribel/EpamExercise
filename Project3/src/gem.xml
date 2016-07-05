@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<jewel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	  xsi:noNamespaceSchemaLocation="gem.xsd">
+
+	<gem id="1">
+		<name>greatDiamont</name>
+		<preciousness>true</preciousness>
+		<origin>ukraine</origin>
+		<visual_parameters>
+			<color>white</color>
+			<transparency>45</transparency>
+			<faces>7</faces>
+		</visual_parameters>
+		<value>2.3</value>
+	</gem>
+	
+	<gem id="2">
+		<name>anotherGem</name>
+		<preciousness>false</preciousness>
+		<origin>USA</origin>
+		<visual_parameters>
+			<color>red</color>
+			<transparency>12</transparency>
+			<faces>4</faces>
+		</visual_parameters>
+		<value>1.5</value>
+	</gem>
+
+</jewel>

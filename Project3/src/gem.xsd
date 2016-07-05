@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="jewel">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="gem" maxOccurs="unbounded" minOccurs="0">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element type="xs:string" name="name"/>
+              <xs:element type="xs:boolean" name="preciousness"/>
+              <xs:element  name="origin">
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:pattern value="[a-zA-Z]+" />
+						</xs:restriction>
+					</xs:simpleType>              	
+              </xs:element>
+              <xs:element name="visual_parameters">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element  name="color">
+                    	<xs:simpleType>
+                    		<xs:restriction base="xs:string">
+                    			<xs:enumeration value="red" />
+                    			<xs:enumeration value="green" />
+                    			<xs:enumeration value="blue" />
+                    			<xs:enumeration value="white" />
+                    		</xs:restriction>
+                    	</xs:simpleType>
+                    </xs:element>
+                    
+                    <xs:element name="transparency">
+                    	<xs:simpleType>
+							<xs:restriction base="xs:byte">
+								<xs:maxInclusive value="100"/>
+								<xs:minInclusive value="0"/>
+							</xs:restriction>
+						</xs:simpleType>
+                    </xs:element>
+                    
+                    <xs:element name="faces">
+                    	<xs:simpleType>
+							<xs:restriction base="xs:byte">
+								<xs:maxInclusive value="15"/>
+								<xs:minInclusive value="4"/>
+							</xs:restriction>
+						</xs:simpleType>
+                    </xs:element>
+                  </xs:sequence>
+                  
+                </xs:complexType>
+              </xs:element>
+              
+              <xs:element name="value">
+              	<xs:simpleType>
+				    <xs:restriction base="xs:float">
+				    	<xs:minExclusive value="0.0"/>
+				    </xs:restriction>
+				</xs:simpleType>
+              </xs:element>
+              
+            </xs:sequence>
+            <xs:attribute type="xs:byte" name="id" use="required" />
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>
