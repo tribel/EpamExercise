@@ -6,6 +6,11 @@ import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.XMLStreamConstants;
 import javax.xml.stream.XMLStreamReader;
 
+import org.xml.sax.SAXException;
+
+import com.xml.Jewel.Gem;
+import com.xml.Jewel.Gem.VisualParameters;
+
 /**
  * Class implements Stax java parser. Generate java class from
  * xml file.
@@ -14,11 +19,36 @@ import javax.xml.stream.XMLStreamReader;
  */
 public class StaxParser  extends SaxParser{
 
+	
+	class StaxHandler extends SaxHandler {
+		
+		public void startElement(String uri, String localName, String qName,
+				String atts) throws SAXException {
+
+			switch (localName) {
+			case "gem":
+				Gem gem = new Gem();
+				gem.setId(Byte.parseByte(atts));
+				jewel.getGem().add(gem);
+				break;
+
+			case "visual_parameters":
+				VisualParameters vp = new VisualParameters();
+				jewel.getGem().get(jewel.getGem().size() - 1).setVisualParameters(vp);
+				break;
+			default:
+				break;
+			
+			}
+		}
+	}
+	
+	
 	@Override
 	public void parse(InputStream in) throws Exception {
 		XMLInputFactory factory = XMLInputFactory.newInstance();
 		XMLStreamReader reader = factory.createXMLStreamReader(in);
-		SaxHandler handler = new SaxHandler();
+		StaxHandler handler = new StaxHandler();
 		try {
 		
 			int event = reader.getEventType();
@@ -26,10 +56,8 @@ public class StaxParser  extends SaxParser{
 				
 				switch (event) {
 				case XMLStreamConstants.START_ELEMENT:
-					//AttributesImpl attributesImpl = new AttributesImpl();
-					//attributesImpl.setValue(0, "id");
-					//Byte.parseByte(reader.getAttributeValue(0));
-					handler.startElement(null, reader.getName().toString(), null, null);
+					handler.startElement(null, reader.getName().toString(), null, 
+							reader.getAttributeValue(null, "id"));
 					break;
 				case XMLStreamConstants.START_DOCUMENT:
 					handler.startDocument();

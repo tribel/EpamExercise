@@ -55,7 +55,7 @@ public class SaxParser {
 			switch (localName) {
 			case "gem":
 				Gem gem = new Gem();
-				if(atts != null) gem.setId(Byte.parseByte(atts.getValue("id")));
+				gem.setId(Byte.parseByte(atts.getValue("id")));
 				jewel.getGem().add(gem);
 				break;
 
