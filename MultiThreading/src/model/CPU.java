@@ -2,63 +2,103 @@ package model;
 
 import java.util.Random;
 
-/**
- * Class that defines main CPU. Includes two process queue 
- * and treat them.
- * @author Tribel
- *
- */
-public class CPU extends Thread{
 
-	private CpuQueue firstProcess;
-	private CpuQueue secondProcess;
+public class CPU extends Thread{
+	ProcessProduser produser;
+	ProcessProduser produser2;
 	
-	/**
-	 * Constructor that defines both of queue
-	 * @param queue first process queue
-	 * @param queue2 second process queue
-	 */
-	public CPU(CpuQueue queue, CpuQueue queue2) {
-		this.firstProcess = queue;
-		this.secondProcess = queue2;
+	public CPU() {
 	}
 	
-	
+	public CPU(ProcessProduser produser, ProcessProduser produser2) {
+		this.produser = produser;
+		this.produser2 = produser2;
+	}
+
 	@Override
 	public void run() {
 		System.out.println("Main CPU is running");
 		
-		ProcessObserver observer = new ProcessObserver();
-		while(!isInterrupted()) {
+		boolean changeProduserFlag = false;
+		produser = new ProcessProduser(this, "First");
+		produser2 = new ProcessProduser(this, "Second");
+		
+		produser2.start();
+		produser.start();
 				
-			if(!observer.isProcessDropped()) {
-				
-				if(new Random().nextInt(3) % 2 == 0) {
-					observer = new ProcessObserver(firstProcess, secondProcess, firstProcess.peekProcess());
-				} else {
-					observer = new ProcessObserver(secondProcess, firstProcess, secondProcess.peekProcess());
-				}
-				
+		CpuProcess prcs = null, secondaryPrcs = null;
+		ProcessProduser cpuCrntProduser = null, secondaryProduser = null;
+		
+		while(!isInterrupted() ) {		
+			
+			if(changeProduserFlag) {
+				ProcessProduser tmp = cpuCrntProduser;
+				cpuCrntProduser = secondaryProduser;
+				secondaryProduser = tmp;
 			} else {
-				observer = new ProcessObserver(observer.changeProcessAfterDroping());
-				
-			}	
-				
-			try {
-				observer.start();
-				System.out.println("Treating the process by CPU" );
-				Thread.sleep(3000);
-				observer.interrupt();
-			} catch (InterruptedException e) {
-				System.out.println(e.getMessage());
-				return;
+				if(new Random().nextInt(20) % 2 == 0) {
+					cpuCrntProduser = produser2;
+					secondaryProduser = produser;
+				} else {
+					cpuCrntProduser = produser;
+					secondaryProduser = produser2;
+				}
 			}
 			
 			
-		}
+			try {
+				synchronized (this) {
+					changeProduserFlag = false;
+					secondaryPrcs = secondaryProduser.getCurrentProcess();
+					prcs = cpuCrntProduser.getCurrentProcess();
+					System.out.println("Treating the process by CPU" + prcs + "--Name - " + cpuCrntProduser.getpName());
+					System.out.println("Waiting");
+
+					this.wait(3000);
+
+					System.out.println("CPU stop waiting ");
+				}
+
+				if (prcs != cpuCrntProduser.getCurrentProcess()) {
+					cpuCrntProduser.incLost();
+					System.out.println("Cpu was notified by  CURRENT same Produser");
+				
+				} else if(secondaryPrcs != secondaryProduser.getCurrentProcess()) {
+					cpuCrntProduser.incDropped();
+					changeProduserFlag = true;
+					System.out.println("Cpu was notified by ANOTHER Produser");
+				
+				} else {
+					
+					System.out.println("Cpu was notified by itself.");
+				}
+
+			} catch (InterruptedException e) {
+				System.out.println(e.getMessage());
+				produser.interrupt();
+				produser2.interrupt();
+				
+				return;
+			} 
+			
+		}	
 		
+		try {
+			produser.join();
+			produser2.join();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+
 	}
 	
 	
+	public ProcessProduser getFirstProduser() {
+		return produser;
+	}
+	
+	public ProcessProduser getSecondProduser() {
+		return produser2;
+	}
 	
 }

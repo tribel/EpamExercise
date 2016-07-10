@@ -1,22 +1,21 @@
 package model;
 
-/**
- * Class that add the {@link CpuProcess} objects in some queue,
- * during main CPU is running.
- * @author Tribel
- *
- */
+import java.util.Random;
+
+
 public class ProcessProduser extends Thread{
 
-	private CpuQueue queue;
+	private volatile CpuProcess currentProcess;
+	private int createdProcessCount;
+	private int lostProcessCount;
+	private int droppedProcessCount;
+	CPU cpu;
+	String prcsName;
 	
-	/**
-	 * Constructor that defines queue in what
-	 * will be {@link CpuProcess} added. 
-	 * @param queue 
-	 */
-	public ProcessProduser(CpuQueue queue) {
-		this.queue = queue;
+
+	public ProcessProduser(CPU cpu, String name ) {
+		this.cpu = cpu;
+		this.prcsName = name;
 	}
 	
 	@Override
@@ -25,18 +24,66 @@ public class ProcessProduser extends Thread{
 		
 		int i = 0;
 		while(!isInterrupted()) {
+			
 			try {
-				Thread.sleep(3000);
-				queue.addToQueue(new CpuProcess(++i, "process " + String.valueOf(i)));
+				synchronized (cpu) {
+					Thread.sleep(getRandomSleepTime() * 1000);
+					currentProcess = new CpuProcess(++i, "process" + prcsName + String.valueOf(i));
+	
+					System.out.println("Add process from producer" + prcsName);
+					createdProcessCount += 1;
+
+					cpu.notify();
+
+					System.out.println("Notify by" + prcsName);
+
+				}
 				
-				System.out.println("Add process to queue from producer");
+				synchronized(this) {
+					System.out.println("Produser"+ prcsName + " waiting");
+					this.wait(2000);
+				}
+				
 			} catch (InterruptedException e) {
 				System.out.println(e.getMessage());
 				return;
 			}
 		}
-		
 	}
 
+	
+	public int getRandomSleepTime() {
+		return new Random().nextInt(2);
+	}
+	
+	public synchronized int getCreatedProcessCount() {
+		return createdProcessCount;
+	}
+	
+	public synchronized CpuProcess getCurrentProcess() {
+		return currentProcess;
+	}
+
+	public String getpName() {
+		return prcsName;
+	}
+	
+	public synchronized void incLost() {
+		lostProcessCount++;
+	}
+	
+	public synchronized void incDropped() {
+		droppedProcessCount++;
+	}
+	
+	public int getLosedProcessCount() {
+		return lostProcessCount;
+	}
+	
+	public int getDroppedProcessCount() {
+		return droppedProcessCount;
+	}
+	
+	
 	
 }
