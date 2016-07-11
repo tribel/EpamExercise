@@ -2,15 +2,28 @@ package model;
 
 import java.util.Random;
 
-
+/**
+ * Main Cpu that treats the processes, creating by 
+ * two producers.
+ * @author Tribel
+ *
+ */
 public class CPU extends Thread{
-	ProcessProduser produser;
-	ProcessProduser produser2;
+	ProcessProducer produser;
+	ProcessProducer produser2;
 	
+	/**
+	 * Default constructor.
+	 */
 	public CPU() {
 	}
 	
-	public CPU(ProcessProduser produser, ProcessProduser produser2) {
+	/**
+	 * Constructor that define both of the Producers.
+	 * @param produser {@link ProcessProducer} first producer.
+	 * @param produser2 {@link ProcessProducer} second producer.
+	 */
+	public CPU(ProcessProducer produser, ProcessProducer produser2) {
 		this.produser = produser;
 		this.produser2 = produser2;
 	}
@@ -20,19 +33,19 @@ public class CPU extends Thread{
 		System.out.println("Main CPU is running");
 		
 		boolean changeProduserFlag = false;
-		produser = new ProcessProduser(this, "First");
-		produser2 = new ProcessProduser(this, "Second");
+		produser = new ProcessProducer(this, "First");
+		produser2 = new ProcessProducer(this, "Second");
 		
 		produser2.start();
 		produser.start();
 				
 		CpuProcess prcs = null, secondaryPrcs = null;
-		ProcessProduser cpuCrntProduser = null, secondaryProduser = null;
+		ProcessProducer cpuCrntProduser = null, secondaryProduser = null;
 		
 		while(!isInterrupted() ) {		
 			
 			if(changeProduserFlag) {
-				ProcessProduser tmp = cpuCrntProduser;
+				ProcessProducer tmp = cpuCrntProduser;
 				cpuCrntProduser = secondaryProduser;
 				secondaryProduser = tmp;
 			} else {
@@ -93,11 +106,11 @@ public class CPU extends Thread{
 	}
 	
 	
-	public ProcessProduser getFirstProduser() {
+	public ProcessProducer getFirstProduser() {
 		return produser;
 	}
 	
-	public ProcessProduser getSecondProduser() {
+	public ProcessProducer getSecondProduser() {
 		return produser2;
 	}
 	
