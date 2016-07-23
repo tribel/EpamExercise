@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE xml>
+<Context>		 
+
+		   <Resource name="jdbc/dbconnect"
+  			auth="Container" 
+  			type="javax.sql.DataSource"
+  			maxActive="100" maxIdle="30" maxWait="10000"
+			username="" 
+			password="" 
+			driverClassName="org.apache.derby.jdbc.EmbeddedDriver"
+			defaultAutoCommit="false"
+			defaultTransactionIsolation="READ_COMMITTED"
+			url="jdbc:derby:E:\Bionic\workpalce\RS"
+			connectionProperties="useUnicode=yes;characterEncoding=utf8;"/>
+</Context>
