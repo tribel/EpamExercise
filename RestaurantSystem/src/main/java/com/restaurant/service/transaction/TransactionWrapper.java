@@ -13,7 +13,7 @@ import org.apache.logging.log4j.Logger;
 /**
  * Realized transaction class 
  * @author Tribel
- *
+ * 
  */
 public class TransactionWrapper {
 	
