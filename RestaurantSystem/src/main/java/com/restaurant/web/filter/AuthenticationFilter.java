@@ -1,6 +1,7 @@
 package com.restaurant.web.filter;
 
 import java.io.IOException;
+import java.util.HashMap;
 
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -8,20 +9,20 @@ import javax.servlet.FilterConfig;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
-import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import com.restaurant.entity.RoleEnum;
 import com.restaurant.entity.Users;
 
 /**
- * Servlet Filter implementation class AuthenticationFilter
+ * Servlet Filter implementation class AuthenticationFilter.
+ * This filter controls access for different type of resources.
  */
 
-//@WebFilter
 public class AuthenticationFilter implements Filter {
 
 	private static final Logger logger = LogManager.getLogger(AuthenticationFilter.class);
@@ -30,6 +31,7 @@ public class AuthenticationFilter implements Filter {
 	private static final String USER_ATTRIBUTE = "user";
 	private String REGISTRATION_PAGE;
 	private String LOGIN_PAGE;
+	private HashMap<String, Integer> commandUserMap;
 
 	public AuthenticationFilter() {
 	}
@@ -51,9 +53,11 @@ public class AuthenticationFilter implements Filter {
 
 		HttpServletRequest req = (HttpServletRequest) request;
 		HttpServletResponse res = (HttpServletResponse) response;
-
+		
 		Users sessionUser = (Users) req.getSession().getAttribute(USER_ATTRIBUTE);
 		logger.info("Session user"+ sessionUser);
+		
+		String currentCommand = request.getParameter("action");
 		
 		if ( (req.getRequestURL().toString().contains(LOGIN_PAGE))
 				|| (req.getRequestURL().toString().contains(REGISTRATION_PAGE))) {
@@ -61,13 +65,14 @@ public class AuthenticationFilter implements Filter {
 			logger.info("Success redirect");
 			chain.doFilter(request, response);
 			
-		}else if(sessionUser != null && sessionUser.getId() != 0){
-			logger.info("Success redirect");
-			chain.doFilter(request, response);
+		} else if(commandUserMap.get(currentCommand) != null) {
+			
+			if(sessionUser.getId() != 0  &&  commandUserMap.get(currentCommand) >= sessionUser.getRoleId()) 
+				chain.doFilter(request, response);
+			else res.sendRedirect(LOGIN);
+
 		} else {
-			logger.info("No user logged in " + req.getRequestURI());
-			 chain.doFilter(request, response);
-			//res.sendRedirect(LOGIN);
+			chain.doFilter(request, response);
 		}
 
 	}
@@ -79,6 +84,11 @@ public class AuthenticationFilter implements Filter {
 	public void init(FilterConfig fConfig) throws ServletException {
 		this.REGISTRATION_PAGE = fConfig.getInitParameter("registrationPage");
 		this.LOGIN_PAGE = fConfig.getInitParameter("loginPage");
+		this.commandUserMap = new HashMap<>();
+			commandUserMap.put("menu", RoleEnum.USER.getValue());
+			commandUserMap.put("payList", RoleEnum.USER.getValue());
+			commandUserMap.put("adminList", RoleEnum.ADMIN.getValue());
+			
 		logger.info("AuthenticationFilter initialized.");
 	}
 

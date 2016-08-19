@@ -15,7 +15,7 @@ import com.restaurant.web.beans.AdminBean;
 import com.restaurant.web.servlet.ControllerServlet;
 
 /**
- * Returning list pay list by exact user
+ * Returning list pay list by exact user.
  * @author Tribel
  *
  */

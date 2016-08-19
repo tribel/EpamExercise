@@ -12,7 +12,7 @@ import com.restaurant.web.beans.CartBean;
 import com.restaurant.web.servlet.ControllerServlet;
 
 /**
- * Add selected dish to menu cart
+ * Add selected dish to menu cart.
  * @author Tribel
  *
  */

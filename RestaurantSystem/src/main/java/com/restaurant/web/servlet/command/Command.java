@@ -20,6 +20,7 @@ public abstract class Command{
 	public static final String ORDERS_ATR = "orders";
 
 	public static final String ADMIN_PAGE = "adminPage";
+	public static final String HISTORY_PAGE = "history";
 	public static final String ADMIN_SERVLET = "AdminServlet";
 	public static final String LOGIN_PAGE = "login";
 	public static final String MENU_PAGE = "menu";
@@ -59,6 +60,7 @@ public abstract class Command{
 	public static final String EMAIL_ATR = "email";
 	public static final String REPEAT_PSW_ATR = "repeatPassword";
 	public static final String ADDRESS_ATR = "address";
+	public static final String HISTORY_ATR = "history";
 	
 	/*
 	 * Pay

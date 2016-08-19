@@ -20,6 +20,7 @@ import com.restaurant.web.servlet.command.CommandFactory;
 
 /**
  * Servlet implementation class ControllerServlet
+ * It implements command pattern.
  */
 @WebServlet
 public class ControllerServlet extends HttpServlet {
@@ -30,11 +31,14 @@ public class ControllerServlet extends HttpServlet {
 	
 	private CommandFactory commandFactory;
 	
-	public static UsersService usersService;
-	public static MenuService menuService;
-	public static OrdersService ordersService;
-	public static OrderDishesService odService;
+	public  static UsersService usersService;
+	public  static MenuService menuService;
+	public  static OrdersService ordersService;
+	public  static OrderDishesService odService;
 	
+	/**
+	 * Constructs default instance , creating {@link CommandFactory} entity.
+	 */
 	public ControllerServlet() {
 		commandFactory = CommandFactory.getInstance();
 	}
@@ -71,5 +75,9 @@ public class ControllerServlet extends HttpServlet {
 		request.getRequestDispatcher(command.executePost(request, response)).forward(request, response);
 	}
 
-
+	@Override
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		doPost(request, response);
+	}
+	
 }

@@ -4,6 +4,13 @@ import java.util.List;
 
 import com.restaurant.entity.Users;
 
+/**
+ * This interface declare user services.
+ * It contains creating new users, authorize, fetching 
+ * lists and edit profile methods.
+ * @author Tribel
+ *
+ */
 public interface UsersService {
 	
 	/**
@@ -21,8 +28,8 @@ public interface UsersService {
 	public Users authorize(String login, String password);
 	
 	/**
-	 * Changing already existing user entity
-	 * @param user entity
+	 * Changing already existing user entity.
+	 * @param user entity with concrete id. 
 	 */
 	public void editUserProfile(Users user);
 	
@@ -40,7 +47,7 @@ public interface UsersService {
 	public List<Users> getUsersList();
 	
 	/**
-	 * Returning role by id
+	 * Returning role name by id
 	 * @param id role id
 	 * @return {@link String} role name
 	 */

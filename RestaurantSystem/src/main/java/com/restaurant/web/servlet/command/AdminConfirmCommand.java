@@ -10,7 +10,7 @@ import com.restaurant.service.OrdersService;
 import com.restaurant.web.servlet.ControllerServlet;
 
 /**
- * Administrator  dish confirm opportunity
+ * Administrator  dish confirm opportunity.
  * @author Tribel
  *
  */

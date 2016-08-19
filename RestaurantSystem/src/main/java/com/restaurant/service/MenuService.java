@@ -4,29 +4,35 @@ import java.util.List;
 
 import com.restaurant.entity.Menu;
 
+/**
+ * This interface declare menu service . It contain methods 
+ * that search , set and create entities for menu.
+ * @author Tribel
+ *
+ */
 public interface MenuService {
 
 	/**
-	 * All of menu list returning
-	 * @return {@link Menu}  {@link List} entity of all the menu 
+	 * Returning full menu list.
+	 * @return {@link List} of all dishes entities. 
 	 */
 	public List<Menu> getAllMenuList();
 
 	/**
-	 * All menu list by category
+	 * Returning menu list that, in which dishes have the passed category.
 	 * @param categoryName {@link String} name of category
-	 * @return {@link Menu}  {@link List} entity by category 
+	 * @return {@link List} of dishes entities. 
 	 */
 	public List<Menu> getMenuListByName(String categoryName);
 
 	/**
 	 * Saving dish entity to menu
-	 * @param menu {@link Menu} entity
+	 * @param menu {@link Menu} instance.
 	 */
 	public void saveDish(Menu menu);
 	
 	/**
-	 * Returning of all category 
+	 * Returning entire category  list
 	 * @return {@link String} {@link List} of category
 	 */
 	public List<String> getAllCategoryList() ;

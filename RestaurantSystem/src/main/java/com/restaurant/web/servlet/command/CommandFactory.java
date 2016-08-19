@@ -27,7 +27,8 @@ public class CommandFactory {
 		commandsMap.put("menu", new MenuGetCommand());
 		commandsMap.put("payList", new PayListGetCommand());
 		commandsMap.put("adminList", new AdminGetConfirmList());
-		
+		commandsMap.put("denial", new AdminDenialCommand());
+		commandsMap.put("history", new AdminGetHistory());
 	}
 	
 	

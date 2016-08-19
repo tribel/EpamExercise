@@ -6,7 +6,6 @@ import java.sql.SQLException;
 
 import junit.framework.Assert;
 
-import org.junit.Ignore;
 import org.junit.Test;
 
 import com.restaurant.dao.MyConnection;
@@ -18,13 +17,12 @@ public class UsersDaoTest {
 	private UsersDao usersDao = new UsersDaoImpl();
 	
 	@Test
-	@Ignore
 	public void testRegistration() throws IOException, SQLException {
 		Connection connection = MyConnection.getConnection();
 		connection.setAutoCommit(false);
 		try {
 
-			Users users = new Users("GumenNAKA", "gumen@gmail.com", "kiev", "gumenka", "1234");
+			Users users = new Users("GumenNA", "gumen@gmail.com", "kiev", "gumenka", "1234");
 			usersDao.registration(null, users);
 			Assert.assertTrue(usersDao.getUsersList(null).contains(users));
 		}catch (Exception e) {
@@ -40,7 +38,6 @@ public class UsersDaoTest {
 	
 	
 	@Test
-	@Ignore
 	public void testAuthorize() throws IOException, SQLException {
 		Connection connection = MyConnection.getConnection();
 		connection.setAutoCommit(false);
@@ -65,7 +62,6 @@ public class UsersDaoTest {
 	
 	
 	@Test
-	@Ignore
 	public void testGetUserById() {
 		try (Connection connection = MyConnection.getConnection()){
 			System.out.println(usersDao.getUserById(null, 3));
@@ -75,7 +71,6 @@ public class UsersDaoTest {
 	}
 	
 	@Test
-	@Ignore
 	public void testGetUsersList() {
 		
 		try (Connection connection = MyConnection.getConnection()){

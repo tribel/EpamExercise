@@ -17,7 +17,8 @@ import com.restaurant.web.beans.AdminBean;
 import com.restaurant.web.servlet.ControllerServlet;
 
 /**
- * Returning and shows menu confirm list for administrator
+ * Returning and shows menu confirm list for administrator.
+ * @see {@link AdminBean}
  * @author Tribel
  *
  */

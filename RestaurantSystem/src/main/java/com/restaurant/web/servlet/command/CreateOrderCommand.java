@@ -19,7 +19,7 @@ import com.restaurant.web.beans.CartBean;
 import com.restaurant.web.servlet.ControllerServlet;
 
 /**
- * Command for creation order by the user
+ * Command for creation order by the concrete user.
  * @author Tribel
  *
  */

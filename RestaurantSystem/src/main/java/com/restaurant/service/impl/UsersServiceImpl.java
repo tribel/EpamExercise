@@ -11,20 +11,33 @@ import com.restaurant.entity.Users;
 import com.restaurant.service.UsersService;
 import com.restaurant.service.transaction.TransactionWrapper;
 
+/**
+ * This class implements {@link UsersService} interface.
+ * @author Tribel
+ *
+ */
 public class UsersServiceImpl implements UsersService {
 
 	private static final Logger logger = LogManager.getLogger(UsersServiceImpl.class);
 	
 	private UsersDao usersDao;
+	private TransactionWrapper transactionWrapper;
 	
-	public UsersServiceImpl(UsersDao usersDao) {
+	/**
+	 * Construct {@link UsersServiceImpl} instance , with special parameters.
+	 * @param usersDao {@link UsersDao} instance.
+	 * @param transactionWrapper {@link TransactionWrapper} instance, that create transaction execution and 
+	 * wrappers all method in it.
+	 */
+	public UsersServiceImpl(UsersDao usersDao, TransactionWrapper transactionWrapper) {
 		this.usersDao = usersDao;
+		this.transactionWrapper = transactionWrapper;
 	}
 
 	@Override
 	public void registration(Users user) {
 		logger.info("User registration");
-		new TransactionWrapper().beginTransaction((Connection conn) -> {
+		transactionWrapper.beginTransaction((Connection conn) -> {
 			usersDao.registration(conn, user);
 			return null;
 		});
@@ -33,7 +46,7 @@ public class UsersServiceImpl implements UsersService {
 	@Override
 	public Users authorize(String login, String password) {
 		logger.info("User authorizing ");
-		return new TransactionWrapper().beginTransaction((Connection conn) -> {
+		return transactionWrapper.beginTransaction((Connection conn) -> {
 			return usersDao.authorize(conn, login, password);
 		});
 	}
@@ -41,7 +54,7 @@ public class UsersServiceImpl implements UsersService {
 	@Override
 	public void editUserProfile(Users user) {
 		logger.info("Change user profile");
-		new TransactionWrapper().beginTransaction((Connection conn) -> {
+		transactionWrapper.beginTransaction((Connection conn) -> {
 			usersDao.editUserProfile(conn, user);
 			return null;
 		});
@@ -51,7 +64,7 @@ public class UsersServiceImpl implements UsersService {
 	@Override
 	public Users getUserById(int id) {
 		logger.info("Select data from Users table");
-		return new TransactionWrapper().beginTransaction((Connection conn) -> {
+		return transactionWrapper.beginTransaction((Connection conn) -> {
 			return usersDao.getUserById(conn , id);
 		});
 
@@ -60,7 +73,7 @@ public class UsersServiceImpl implements UsersService {
 	@Override
 	public List<Users> getUsersList() {
 		logger.info("Select data from Users table");
-		return new TransactionWrapper().beginTransaction((Connection conn) -> {
+		return transactionWrapper.beginTransaction((Connection conn) -> {
 			return usersDao.getUsersList(conn);
 		});
 	}
@@ -68,7 +81,7 @@ public class UsersServiceImpl implements UsersService {
 	@Override
 	public String getRoleNameById(int id) {
 		logger.info("Select data from Role table");
-		return new TransactionWrapper().beginTransaction((Connection conn) -> {
+		return transactionWrapper.beginTransaction((Connection conn) -> {
 			return usersDao.getRoleNameById(conn, id);
 		});
 			

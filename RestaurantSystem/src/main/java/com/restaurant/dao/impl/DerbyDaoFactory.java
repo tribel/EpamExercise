@@ -7,6 +7,11 @@ import com.restaurant.dao.OrderDishesDao;
 import com.restaurant.dao.OrdersDao;
 import com.restaurant.dao.UsersDao;
 
+/**
+ * This class implements DAO factory for JDBC connection.
+ * @author Tribel
+ *
+ */
 public class DerbyDaoFactory extends DaoFactory {
 
 	@Override

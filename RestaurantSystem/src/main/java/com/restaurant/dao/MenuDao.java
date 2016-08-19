@@ -7,39 +7,44 @@ import java.util.List;
 
 import com.restaurant.entity.Menu;
 
+/**
+ * Interface for treating, creating new menu data. 
+ * @author Tribel
+ *
+ */
 public interface MenuDao {
 
 	/**
-	 * Get all dishes list
-	 * @param connection
-	 * @return full {@code List<Menu>} all of the dishes
-	 * @throws SQLException
+	 * Returning full dishes list existing in data base.
+	 * @param connection {@link Connection} (session) with a specific database
+	 * @return full {@code List<Menu>} of the dishes
+	 * @throws SQLException if a database access error occurs or this method is called on a closed connection
 	 */
 	public List<Menu> getAllMenuList(Connection connection) throws SQLException;
 	
 	/**
-	 *  Returning dishes list by category id
-	 * @param connection
-	 * @param categoryId id of exact category
+	 *  Returning dishes list by category id.
+	 * @param connection {@link Connection} (session) with a specific database.
+	 * @param categoryId - id of exact category, for further dish list.
 	 * @return {@code List<Menu>} dishes list by exact category id 
-	 * @throws SQLException
+	 * @throws SQLException if a database access error occurs or this method is called on a closed connection.
 	 */
 	public List<Menu> getMenuListByCategoryId(Connection connection, int categoryId) throws SQLException;
 	
 	/**
-	 * Saving dish to data base
-	 * @param connection
-	 * @param menu entity that will be save
-	 * @throws SQLException
+	 * Saving new dish to data base.
+	 * @param connection {@link Connection} (session) with a specific database.
+	 * @param {@link Menu} instance that will be save.
+	 * @throws SQLException if a database access error occurs or this method is called on a closed connection.
 	 */
 	public void saveDish(Connection connection, Menu menu) throws SQLException;
 	
 	/**
-	 * Get dish entity by id
-	 * @param connection
-	 * @param id of the dish entity
-	 * @return {@code Menu} entity 
-	 * @throws SQLException
+	 * Returning dish entity by particular id.
+	 * @param connection {@link Connection} (session) with a specific database.
+	 * @param id of the dish entity.
+	 * @return {@code Menu} entity that have passed id.  
+	 * @throws SQLException if a database access error occurs or this method is called on a closed connection.
 	 */
 	public Menu getById(Connection connection, int id) throws SQLException;
 }

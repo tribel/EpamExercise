@@ -8,15 +8,14 @@ import javax.servlet.FilterConfig;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
-import javax.servlet.annotation.WebFilter;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 /**
- * Servlet Filter implementation class EncodingFilter
+ * Servlet Filter implementation class EncodingFilter.
+ * It sets single encoding type for application.
  */
-//@WebFilter("/*")
 public class EncodingFilter implements Filter {
 
 	private static final Logger logger = LogManager.getLogger(EncodingFilter.class);

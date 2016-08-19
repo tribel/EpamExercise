@@ -11,7 +11,7 @@ import com.restaurant.service.UsersService;
 import com.restaurant.web.servlet.ControllerServlet;
 
 /**
- * Registration new user to the system
+ * Registration new user to the system.
  * @author Tribel
  *
  */

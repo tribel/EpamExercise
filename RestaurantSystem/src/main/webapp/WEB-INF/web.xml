@@ -2,16 +2,9 @@
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:jsp="http://java.sun.com/xml/ns/javaee/jsp" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" version="3.0">
   <display-name>RestaurantSystem</display-name>
   <welcome-file-list>
-    <welcome-file>NewFile.jsp</welcome-file>
+    <welcome-file>login.jsp</welcome-file>
   </welcome-file-list>
-  <servlet>
-    <servlet-name>NewFile.jsp</servlet-name>
-    <jsp-file>/WEB-INF/view/NewFile.jsp</jsp-file>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>NewFile.jsp</servlet-name>
-    <url-pattern>/NewFile</url-pattern>
-  </servlet-mapping>
+
   <servlet>
     <servlet-name>login.jsp</servlet-name>
     <jsp-file>/WEB-INF/view/login.jsp</jsp-file>
@@ -35,6 +28,14 @@
   <servlet-mapping>
     <servlet-name>menu.jsp</servlet-name>
     <url-pattern>/menu</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>history.jsp</servlet-name>
+    <jsp-file>/WEB-INF/view/history.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>history.jsp</servlet-name>
+    <url-pattern>/history</url-pattern>
   </servlet-mapping>
   <servlet>
     <servlet-name>cart.jsp</servlet-name>

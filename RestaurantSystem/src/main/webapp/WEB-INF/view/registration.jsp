@@ -1,12 +1,17 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
-
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
+
 <html>
 <head>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>	
+<c:set var="language" value="${not empty param.language ? param.language : not empty language ? language : pageContext.request.locale}" scope="session" />
+<fmt:setLocale value="${language}" />
+<fmt:setBundle basename="bundle.text" />
 <jsp:include page="/WEB-INF/view/template/header.jsp" />
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Registration</title>
+<title>Registration></title>
+
 
 <style type="text/css">
 body {
@@ -25,23 +30,34 @@ body {
 
 </head>
 <body>
+
 	<div class="container">
 
-			<h2>Registration form</h2>
+			<h2><fmt:message key="registration.label.form"/></h2>
 
 		<form action="ControllerServlet" method="post" class="form-signin-reg">
-			<label>Enter name</label> <input type="text"
-				class="form-control input-lg" name="name" required/> <br /> <label>Email</label>
+			<label><fmt:message key="registration.label.name"/></label> <input type="text"
+				class="form-control input-lg" name="name" required/> <br /> 
+			
+			<label><fmt:message key="registration.label.email"/></label>
 			<input type="text" class="form-control input-lg" name="email" required/> <br />
-			<label>Address</label> <input type="text"
-				class="form-control input-lg" name="address" required/> <br /> <label>Login</label>
+			
+			<label><fmt:message key="registration.label.address"/></label> 
+			<input type="text"
+				class="form-control input-lg" name="address" required/> <br /> 
+				
+			<label><fmt:message key="registration.label.login"/></label>
 			<input type="text" class="form-control input-lg" name="login" required/> <br />
-			<label>Password</label> <input type="password"
-				class="form-control input-lg" name="password" required/> <br /> <label>Repeat
-				password</label> <input type="password" class="form-control input-lg"
-				name="repeatPassword" required/> <br />
+			
+			<label><fmt:message key="registration.label.password"/></label> 
+			<input type="password"
+				class="form-control input-lg" name="password" required/> <br /> 
+				
+			<label><fmt:message key="registration.label.repeatPsw"/></label> 
+			<input type="password" class="form-control input-lg" name="repeatPassword" required/> <br />
+			
 			<button type="submit" class="btn btn-primary btn-lg btn-block" name="action" value="registration">
-			Registration</button>
+			<fmt:message key="registration.button.registration"/></button>
 			<br />
 		</form>
 	</div>

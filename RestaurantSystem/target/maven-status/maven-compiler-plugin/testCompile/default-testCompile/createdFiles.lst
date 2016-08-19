@@ -1,0 +1,10 @@
+com\restaurant\dao\CategoryDaoImplTest.class
+com\restaurant\service\MenuServiceImplTest.class
+com\restaurant\dao\MenuDaoTest.class
+com\restaurant\dao\OrderDishesDaoTest.class
+com\restaurant\service\OrderDishesServiceImplTest.class
+com\restaurant\dao\UsersDaoTest.class
+com\restaurant\service\UsersServiceImplTest.class
+com\restaurant\dao\MyConnection.class
+com\restaurant\dao\OrdersDaoTest.class
+com\restaurant\service\OrdersServiceImplTest.class

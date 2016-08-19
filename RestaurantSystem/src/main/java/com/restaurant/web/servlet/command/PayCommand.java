@@ -10,7 +10,7 @@ import com.restaurant.service.OrdersService;
 import com.restaurant.web.servlet.ControllerServlet;
 
 /**
- * Pay for order by the user
+ * Pay for order by the concrete user.
  * @author Tribel
  *
  */

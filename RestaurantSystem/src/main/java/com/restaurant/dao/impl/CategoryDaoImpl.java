@@ -13,7 +13,12 @@ import org.apache.logging.log4j.Logger;
 
 import com.restaurant.dao.CategoryDao;
 
-
+/**
+ * Implementation of {@link CategoryDao} interface , 
+ * realized selecting methods. 
+ * @author Tribel
+ *
+ */
 public class CategoryDaoImpl implements CategoryDao {
 
 	private static final Logger logger = LogManager.getLogger(CategoryDaoImpl.class);

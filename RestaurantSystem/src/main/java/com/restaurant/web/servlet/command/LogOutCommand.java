@@ -5,7 +5,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
- * Out from the current session by current user
+ * Out from the current session by current user.
  * @author Tribel
  *
  */

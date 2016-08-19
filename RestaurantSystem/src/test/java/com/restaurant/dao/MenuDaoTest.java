@@ -20,7 +20,6 @@ public class MenuDaoTest {
 	private MenuDao menuDao = new MenuDaoImpl();
 	
 	@Test
-	@Ignore
 	public void testGetAllMenuList() throws IOException, SQLException {
 		Connection connection = MyConnection.getConnection();
 		connection.setAutoCommit(false);
@@ -39,7 +38,6 @@ public class MenuDaoTest {
 	}
 	
 	@Test
-	@Ignore
 	public void testGetMenuListByCategoryId() throws IOException, SQLException {
 		Connection connection = MyConnection.getConnection();
 		connection.setAutoCommit(false);
@@ -57,7 +55,6 @@ public class MenuDaoTest {
 	}
 	
 	@Test
-	@Ignore
 	public void testSaveDish() throws SQLException {
 		Connection connection = MyConnection.getConnection();
 		connection.setAutoCommit(false);
@@ -76,6 +73,7 @@ public class MenuDaoTest {
 	}
 	
 	@Test
+	@Ignore
 	public void testGetAllCategoryList() throws SQLException {
 		//Connection connection = MyConnection.getConnection();
 		CategoryDao categoryDao = new CategoryDaoImpl();

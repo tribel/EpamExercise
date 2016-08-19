@@ -4,7 +4,8 @@ import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
 /**
- * Entity for creating orders 
+ *  This class implements order  representation. 
+ *  It contains id, date-time , users id and status.
  * @author Tribel
  *
  */
@@ -15,10 +16,20 @@ public class Orders {
 	private int userId;
 	private String status;
 
+	/**
+	 *  Constructs default instance.
+	 *  Set date-time value by current time. 
+	 */
 	public Orders() {
 		this.dateTime = Timestamp.valueOf(LocalDateTime.now());
 	}
 
+	/**
+	 * Constructs {@link Orders} instance.
+	 * @param date and time {@link Timestamp} of creating order.
+	 * @param id of the user.
+	 * @param order {@link String} status.
+	 */
 	public Orders(Timestamp dateTime, int userId, String status) {
 		super();
 		this.dateTime = dateTime;
@@ -26,6 +37,11 @@ public class Orders {
 		this.status = status;
 	}
 	
+	/**
+	 * Constructs {@link Orders} instance.
+	 *	@param date and time {@link Timestamp} of creating order.
+	 *  @param id of the user.
+	 */
 	public Orders(Timestamp dateTime, int userId) {
 		super();
 		this.dateTime = dateTime;

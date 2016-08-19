@@ -14,6 +14,12 @@ import org.apache.logging.log4j.Logger;
 import com.restaurant.dao.UsersDao;
 import com.restaurant.entity.Users;
 
+
+/**
+ * Implementation of {@link UsersDao} interface.
+ * @author Tribel
+ *
+ */
 public class UsersDaoImpl implements UsersDao{
 
 	private static final Logger logger = LogManager.getLogger(UsersDaoImpl.class);

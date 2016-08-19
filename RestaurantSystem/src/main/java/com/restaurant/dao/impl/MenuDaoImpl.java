@@ -15,6 +15,11 @@ import org.apache.logging.log4j.Logger;
 import com.restaurant.dao.MenuDao;
 import com.restaurant.entity.Menu;
 
+/**
+ * Implementation of the {@link MenuDao} interface.
+ * @author Tribel
+ *
+ */
 public class MenuDaoImpl implements MenuDao{
 	
 	private static final Logger logger = LogManager.getLogger(MenuDaoImpl.class);

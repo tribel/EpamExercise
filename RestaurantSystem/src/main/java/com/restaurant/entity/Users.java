@@ -1,7 +1,9 @@
 package com.restaurant.entity;
 
 /**
- * Entity for users
+ * This class implements users representation.
+ * It contains id, name , email, address ,roles id ,
+ * login and password.
  * @author Tribel
  *
  */
@@ -15,11 +17,21 @@ public class Users {
 	private String login;
 	private String password;
 	
-	
+	/**
+	 * Constructs default instance, set the role to common user.
+	 */
 	public Users() {
 		this.roleId = RoleEnum.USER.getValue();
 	}
 	
+	/**
+	 * Constructs {@link Users} instance
+	 * @param name of the user.
+	 * @param email of particular user.
+	 * @param address {@link String} of the user.
+	 * @param login {@link String} user login.
+	 * @param password {@link String} 	of the user.
+	 */
 	public Users(String name, String email, String address,
 			String login, String password) {
 
@@ -32,7 +44,11 @@ public class Users {
 	}
 	
 	
-
+	/**
+	 * Constructs {@link Users} instance
+	 * @param login {@link String} user login.
+	 * @param password {@link String} 	of the user.
+	 */
 	public Users(String login, String password) {
 		this.login = login;
 		this.password = password;

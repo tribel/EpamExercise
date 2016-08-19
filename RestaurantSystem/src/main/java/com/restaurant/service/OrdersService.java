@@ -6,25 +6,32 @@ import com.restaurant.entity.OrderDishes;
 import com.restaurant.entity.Orders;
 import com.restaurant.entity.Users;
 
+/**
+ * This interface declare order service.
+ * It contains creating order method , change and 
+ * searching by some feature methods. 
+ * @author Tribel
+ *
+ */
 public interface OrdersService {
 	
 	/**
-	 *  Method for creating order
+	 *  Method for creating new order.
 	 * @param order new instance
-	 * @param users current user instance
+	 * @param current {@link Users} instance
 	 * @param odList already added dishes to cart list
 	 */
 	public void createOrder(Orders order, Users users, List<OrderDishes> odList);
 	
 	/**
 	 * Returning active orders list
-	 * @return {@link List} {@link Orders}
+	 * @return {@link List} {@link Orders} in which status is absent. 
 	 */
 	public List<Orders> getOrdersList();
 	
 	/**
-	 * Set order status as done
-	 * @param orderId order id
+	 * Set order status as done.
+	 * @param concrete order id.
 	 */
 	public void setStatusAsDone(int orderId);
 	
@@ -47,4 +54,13 @@ public interface OrdersService {
 	 * @return {@link Orders} {@link List}
 	 */
 	public List<Orders> getDoneOrdersList(int userId);
+	
+	/**
+	 * Marked exact order with exact id like 'denial', and means 
+	 * that administrator has rejected  the order. 
+	 * @param orderId {@link Integer} id of the order that will be marked like 'denial'.
+	 */
+	public void setStatusAsDenial(int orderId);
+	
+	public List<Orders> getHistory();
 }	

@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
 
-import org.junit.Ignore;
 import org.junit.Test;
 
 import com.restaurant.dao.MyConnection;
@@ -17,7 +16,6 @@ public class OrderDishesDaoTest {
 	private OrderDishesDao orderDisshes = new OrderDishesDaoImpl();
 	
 	@Test
-	@Ignore
 	public void testFindById() {
 		try (Connection connection = MyConnection.getConnection()){
 			System.out.println(orderDisshes.findByOrderId(null , 1));
@@ -27,7 +25,6 @@ public class OrderDishesDaoTest {
 	}
 
 	@Test
-	@Ignore
 	public void testGetTotalOrderPrice() {
 		try (Connection connection = MyConnection.getConnection()){
 			System.out.println(orderDisshes.getTotalOrderPrice(null ,1));
@@ -37,7 +34,6 @@ public class OrderDishesDaoTest {
 	}
 
 	@Test
-	@Ignore
 	public void testAdd() throws IOException, SQLException {
 		Connection connection = MyConnection.getConnection();
 		connection.setAutoCommit(false);

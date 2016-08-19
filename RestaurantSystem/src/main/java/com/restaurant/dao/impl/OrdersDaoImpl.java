@@ -15,6 +15,11 @@ import org.apache.logging.log4j.Logger;
 import com.restaurant.dao.OrdersDao;
 import com.restaurant.entity.Orders;
 
+/**
+ * Implementation of {@link OrdersDao} interface.
+ * @author Tribel
+ *
+ */
 public class OrdersDaoImpl implements OrdersDao{
 
 	private static final Logger logger = LogManager.getLogger(OrdersDaoImpl.class);
@@ -26,7 +31,8 @@ public class OrdersDaoImpl implements OrdersDao{
 	private static final String SQL_GET_BY_ID = "Select * From Orders o WHERE o.id = ? ";
 	private static final String SQL_GET_DONE_ORDERS = "Select * From Orders o Where o.status = 'done' AND o.userId = ?";
 	private static final String SQL_SET_AS_PAID = "Update Orders o SET status = 'paid' Where o.id = ?";
-	
+	private static final String SQL_SET_AS_DENIAL = "Update Orders o SET status = 'denial' Where o.id = ?";
+	private static final String SQL_GET_HISTORY = "Select * From Orders";
 	
 	@Override
 	public Orders createOrder(Connection connection ,Orders order) throws SQLException {
@@ -149,6 +155,41 @@ public class OrdersDaoImpl implements OrdersDao{
 			throw e;
 		}
 
+		return orderList;
+	}
+
+	@Override
+	public void setStatusAsDenial(Connection connection, int orderId) throws SQLException {
+		try (PreparedStatement statement = connection.prepareStatement(SQL_SET_AS_DENIAL)){
+			statement.setInt(1, orderId);
+			statement.executeUpdate();
+			
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+			throw e;
+		}
+	}
+
+	@Override
+	public List<Orders> getHistory(Connection connection) throws SQLException {
+List<Orders> orderList = new ArrayList<>();
+		
+		try(PreparedStatement statement = connection.prepareStatement(SQL_GET_HISTORY)) {	
+			ResultSet set =	statement.executeQuery();
+			
+			while(set.next()) {
+				Orders order = new Orders();
+				order.setId(set.getInt("id"));
+				order.setDateTime(set.getTimestamp("dateTime"));
+				order.setUserId(set.getInt("userId"));
+				order.setStatus(set.getString("status"));
+				orderList.add(order);
+			}
+		} catch(SQLException e) {
+			logger.error(e.getMessage());
+			throw e;
+		}
+		
 		return orderList;
 	}
 

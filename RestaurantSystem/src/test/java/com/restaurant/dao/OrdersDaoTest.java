@@ -8,7 +8,6 @@ import java.time.LocalDateTime;
 
 import junit.framework.Assert;
 
-import org.junit.Ignore;
 import org.junit.Test;
 
 import com.restaurant.dao.MyConnection;
@@ -20,7 +19,6 @@ public class OrdersDaoTest {
 	OrdersDao ordersDao = new OrdersDaoImpl();
 	
 	@Test
-	@Ignore
 	public void testCreateOrder() throws IOException, SQLException {
 		Connection connection = MyConnection.getConnection();
 		connection.setAutoCommit(false);
@@ -40,7 +38,6 @@ public class OrdersDaoTest {
 	}
 
 	@Test
-	@Ignore
 	public void testGetOrdersList() {
 		try (Connection connection = MyConnection.getConnection()){
 			System.out.println(ordersDao.getOrdersList(null));
@@ -51,7 +48,6 @@ public class OrdersDaoTest {
 	
 	
 	@Test
-	@Ignore
 	public void testSetStatusAsDone() throws IOException, SQLException {
 		Connection connection = MyConnection.getConnection();
 		connection.setAutoCommit(false);
@@ -69,7 +65,6 @@ public class OrdersDaoTest {
 	
 	
 	@Test
-	@Ignore
 	public void testFindById() {
 		try (Connection connection = MyConnection.getConnection()){
 			System.out.println(ordersDao.findById(null ,4));

@@ -1,7 +1,8 @@
 package com.restaurant.entity;
 
 /**
- *  Entity for every dish in menu
+ *  This class implements dish entity for entire menu. 
+ *  It contains id , name , price , and id of particular category.
  * @author Tribel
  *
  */
@@ -12,9 +13,19 @@ public class Menu {
 	private String name;
 	private int categoryId;
 
+	/**
+	 * Constructs default instance.
+	 */
 	public Menu() {
 	}
 
+	/**
+	 * Constructs {@link Menu} instance with further parameters.
+	 * @param id of the {@link Menu} entity.
+	 * @param price of the particular dish.
+	 * @param {@link String} name of the dish. 
+	 * @param id of exact dish category.
+	 */
 	public Menu(int id, double price, String name, int categoryId) {
 		super();
 		this.id = id;
@@ -23,6 +34,12 @@ public class Menu {
 		this.categoryId = categoryId;
 	}
 	
+	/**
+	 * Constructs {@link Menu} instance with further parameters.
+	 * @param price of the particular dish.
+	 * @param {@link String} name of the dish. 
+	 * @param id of exact dish category.
+	 */
 	public Menu(double price, String name, int categoryId) {
 		super();
 		this.price = price;

@@ -12,22 +12,36 @@ import com.restaurant.entity.Menu;
 import com.restaurant.service.MenuService;
 import com.restaurant.service.transaction.TransactionWrapper;
 
+/**
+ * This class implements {@link MenuService} interface.
+ * @author Tribel
+ *
+ */
 public class MenuServiceImpl implements MenuService{
 
 	private static final Logger logger = LogManager.getLogger(MenuServiceImpl.class);
 	
 	private MenuDao menuDao;
 	private CategoryDao categoryDao;
+	private TransactionWrapper transactionWrapper;
 	
-	public MenuServiceImpl(MenuDao menuDao, CategoryDao categoryDao) {
+	/**
+	 * Constructs {@link MenuServiceImpl} instance, with special parameters.
+	 * @param menuDao {@link MenuDao} instance.
+	 * @param categoryDao {@link CategoryDao} instance.
+	 * @param transactionWrapper {@link TransactionWrapper} instance, that create transaction execution and 
+	 * wrappers all method in it.
+	 */
+	public MenuServiceImpl(MenuDao menuDao, CategoryDao categoryDao, TransactionWrapper transactionWrapper) {
 		this.menuDao = menuDao;
 		this.categoryDao = categoryDao;
+		this.transactionWrapper = transactionWrapper;
 	}
 
 	@Override
 	public List<Menu> getAllMenuList() {
 		logger.info("Select data from Menu table");
-		return new TransactionWrapper().beginTransaction((Connection conn) -> {
+		return transactionWrapper.beginTransaction((Connection conn) -> {
 			return menuDao.getAllMenuList(conn);
 		});
 	}
@@ -36,7 +50,7 @@ public class MenuServiceImpl implements MenuService{
 	public List<Menu> getMenuListByName(String categoryName) {
 		logger.info("Select data from Menu table");
 		
-		return new TransactionWrapper().beginTransaction((Connection conn) -> {
+		return transactionWrapper.beginTransaction((Connection conn) -> {
 			int categoryId = categoryDao.getCategoryIdByName(conn ,categoryName);
 			return menuDao.getMenuListByCategoryId(conn , categoryId);
 		});
@@ -47,7 +61,7 @@ public class MenuServiceImpl implements MenuService{
 	public void saveDish(Menu menu) {
 		logger.info("Saving new dish");
 		
-		 new TransactionWrapper().beginTransaction((Connection conn) -> {
+		 transactionWrapper.beginTransaction((Connection conn) -> {
 			menuDao.saveDish(conn, menu);
 			return null;
 		});
@@ -57,7 +71,7 @@ public class MenuServiceImpl implements MenuService{
 	public List<String> getAllCategoryList() {
 		logger.info("Select data from Category table");
 		
-		return new TransactionWrapper().beginTransaction((Connection conn) -> {
+		return transactionWrapper.beginTransaction((Connection conn) -> {
 			return categoryDao.getAllCategoryList(conn);
 		});
 	}
@@ -66,7 +80,7 @@ public class MenuServiceImpl implements MenuService{
 	public Menu getById(int id) {
 		logger.info("Select data from Menu table");
 		
-		return new TransactionWrapper().beginTransaction((Connection conn) -> {
+		return transactionWrapper.beginTransaction((Connection conn) -> {
 			return menuDao.getById(conn, id);
 		});	
 		

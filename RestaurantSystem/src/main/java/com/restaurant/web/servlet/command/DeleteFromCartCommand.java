@@ -12,7 +12,7 @@ import com.restaurant.web.beans.CartBean;
 import com.restaurant.web.servlet.ControllerServlet;
 
 /**
- * Deleting menu dish form the cart by the user
+ * Deleting menu dish form the cart by the user.
  * @author Tribel
  *
  */

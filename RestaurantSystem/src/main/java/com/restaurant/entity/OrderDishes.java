@@ -1,7 +1,8 @@
 package com.restaurant.entity;
 
 /**
- *  Entity for union dishId and orderId
+ *  This class implements order dishes representation.
+ *  It contains id, price, id of the dish, order id, and sum price.
  * @author Tribel
  *
  */
@@ -12,9 +13,18 @@ public class OrderDishes {
 	private int orderId;
 	private double price;
 
+	/**
+	 * Constructs default instance.
+	 */
 	public OrderDishes() {
 	}
 
+	/**
+	 * Constructs {@link OrderDishes} instance with special parameters.
+	 * @param id of the concrete dish. 
+	 * @param id of particular order.
+	 * @param price - dish price.
+	 */
 	public OrderDishes(int dishId, int orderId, double price) {
 		super();
 		this.dishId = dishId;
@@ -22,6 +32,11 @@ public class OrderDishes {
 		this.price = price;
 	}
 
+	/**
+	 * Constructs {@link OrderDishes} instance with special parameters.
+	 * @param id of particular order.
+	 * @param price - dish price.
+	 */
 	public OrderDishes(int dishId, double price) {
 		super();
 		this.dishId = dishId;

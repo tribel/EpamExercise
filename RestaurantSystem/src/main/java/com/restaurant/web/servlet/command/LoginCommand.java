@@ -12,7 +12,7 @@ import com.restaurant.service.UsersService;
 import com.restaurant.web.servlet.ControllerServlet;
 
 /**
- *  User authorization that already exist 
+ *  User authorization that already exist .
  * @author Tribel
  *
  */

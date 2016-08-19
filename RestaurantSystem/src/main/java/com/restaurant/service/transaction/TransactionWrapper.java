@@ -11,7 +11,8 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 /**
- * Realized transaction class 
+ * This class realized transaction wrapping and  
+ * creation data base connection pool.
  * @author Tribel
  * 
  */
@@ -20,7 +21,11 @@ public class TransactionWrapper {
 	private static final Logger logger = LogManager.getLogger(TransactionWrapper.class);
 	private DataSource dataSource;
 	
-	
+	/**
+	 * Constructs default instance , create connection pool.
+	 * @see DataSource
+	 * @see InitialContext
+	 */
 	public TransactionWrapper() {
 		
 		try {
@@ -36,7 +41,7 @@ public class TransactionWrapper {
 	/**
 	 * Transaction wrapper , that create {@link Connection} and catch Exceptions
 	 * @param command {@link Operation} entity in anonymous class 
-	 * @return result 
+	 * @return result - some generic result that return the anonymous class.
 	 */
 	public <T> T beginTransaction(Operation<T> command) {
 		T result = null;

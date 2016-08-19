@@ -1,7 +1,8 @@
 package com.restaurant.entity;
 
 /**
- *  Entity for category of dish in menu
+ * This class implements category for menu representation.
+ * It contains  is, name of particular category.
  * @author Tribel
  *
  */
@@ -10,9 +11,17 @@ public class Category {
 	int id;
 	String name;
 	
+	/**
+	 * Constructs default instance.
+	 */
 	public Category() {
 	}
 
+	/**
+	 * Constructs an {@link Category} instance with id and name.
+	 * @param id of category.
+	 * @param name {@link String} of new category.
+	 */
 	public Category(int id, String name) {
 		this.id = id;
 		this.name = name;

@@ -8,12 +8,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import com.restaurant.dao.OrderDishesDao;
+import com.restaurant.entity.Menu;
 import com.restaurant.entity.OrderDishes;
 
+/**
+ * Implements {@link OrderDishesDao} interface.
+ * @author Tribel
+ *
+ */
 public class OrderDishesDaoImpl implements OrderDishesDao{
 	
 	private static final Logger logger = LogManager.getLogger(OrdersDaoImpl.class);
@@ -22,6 +29,8 @@ public class OrderDishesDaoImpl implements OrderDishesDao{
 	private static final String SQL_TOTAL_PRICE = "Select SUM(price) AS sumprice From OrderDishes od Where od.orderId = ? ";
 	private static final String SQL_INSERT_OD = "insert into OrderDishes(dishId, orderId ,price ) "
 																			+ "values(?, ? ,? )";
+	
+	private static final String SQL_GET_DISH = "Select count(*) From OrderDishes od Where od.orderId = ?";
 	
 	@Override
 	public List<OrderDishes> findByOrderId(Connection connection, int id) throws SQLException {
@@ -80,6 +89,25 @@ public class OrderDishesDaoImpl implements OrderDishesDao{
 			logger.error(e.getMessage());
 			throw e;
 		}
+	}
+
+	@Override
+	public int  getMenuListByOrderID(Connection connection, int id) throws SQLException {
+		int result = 0;
+		try(PreparedStatement statement = connection.prepareStatement(SQL_GET_DISH)) {		
+			statement.setInt(1, id);
+			ResultSet set = statement.executeQuery();
+			
+			while(set.next()) {
+				result = set.getInt(1);
+			}
+			
+		} catch(SQLException e) {
+			logger.error(e.getMessage());
+			throw e;
+		}
+		
+		return result;
 	}
 	
 	
